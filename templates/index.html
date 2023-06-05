@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Philosophy Engine</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesindex.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://kit.fontawesome.com/5f361c050f.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <div class="header">
+        <h1>Philosophy Engine</h1>
+        <p>The world's first semantic search engine for philosophical papers.</p>
+    </div>
+
+    <div id="container">
+        <div id="flags"></div>
+        <svg id="charts"></svg>
+    </div>
+
+    <div id="tooltip" class="tooltip"></div>
+
+    <form action="/" method="post" class="search-form">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Let's find thoughts on" name="query">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+        </div>
+    </form>
+
+    <div class="suggested-prompts">
+        <h3>Suggested Prompts</h3>
+        <ul id="suggested-prompt-list">
+            <li><a href="#" class="suggested-prompt">What is love?</a></li>
+            <li><a href="#" class="suggested-prompt">Arguements for metaphysics</a></li>
+            <li><a href="#" class="suggested-prompt">How to percieve conciousness?</a></li>
+            <li><a href="#" class="suggested-prompt">Logic and Epistemology</a></li>
+        </ul>
+    </div>
+
+    <script src="{{ url_for('static', filename='graph2.js') }}"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        var suggestedPrompts = document.querySelectorAll('.suggested-prompt');
+        suggestedPrompts.forEach(function(prompt) {
+            prompt.addEventListener('click', function(event) {
+                event.preventDefault();
+                var query = this.textContent;
+                document.querySelector('input[name="query"]').value = query;
+            });
+        });
+    </script>
+</body>
+</html>
